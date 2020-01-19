@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_to_do_list/Widgets/Tasks_List.dart';
 import 'package:flutter_to_do_list/Widgets/Constants.dart';
+import 'package:flutter_to_do_list/model/Task.dart';
+import 'package:flutter_to_do_list/model/TaskData.dart';
+import 'package:provider/provider.dart';
 
 import 'Add_Task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  String taskTitle;
+
+  void tasksAdded(String taskTitle) {
+//    setState(() {
+//      tasks.add(Task(Name: taskTitle));
+//    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +79,7 @@ class TasksScreen extends StatelessWidget {
             style: TextStyle(fontSize: 50.0, color: Colors.white),
           ),
           Text(
-            '12Taks',
+            '${Provider.of<TaskData>(context).tasks.length} Tasks',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
         ],
@@ -73,6 +89,7 @@ class TasksScreen extends StatelessWidget {
 
   void ShowModelSheet(BuildContext context) {
     showModalBottomSheet(
-        context: context, builder: (BuildContext context) => AddTask());
+        context: context,
+        builder: (BuildContext context) => AddTask(tasksAdded));
   }
 }

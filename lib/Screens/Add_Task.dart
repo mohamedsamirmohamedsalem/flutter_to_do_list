@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_to_do_list/Widgets/Constants.dart';
+import 'package:flutter_to_do_list/Widgets/Tasks_List.dart';
+import 'package:flutter_to_do_list/model/Task.dart';
 
-class AddTask extends StatelessWidget {
+class AddTask extends StatefulWidget {
+  Function tasksAdded;
+  AddTask(this.tasksAdded);
+  @override
+  _AddTaskState createState() => _AddTaskState();
+}
+
+class _AddTaskState extends State<AddTask> {
+  String taskTitle;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,11 +32,15 @@ class AddTask extends StatelessWidget {
               TextField(
                 autofocus: true,
                 textAlign: TextAlign.center,
+                //  textInputAction: TextInputAction.done,
+                onChanged: (newText) {
+                  taskTitle = newText;
+                },
               ),
               Container(
                 color: Colors.lightBlueAccent,
                 height: 5.0,
-                ),
+              ),
               SizedBox(
                 height: 10.0,
               ),
@@ -36,7 +51,10 @@ class AddTask extends StatelessWidget {
                 ),
                 color: Colors.lightBlueAccent,
                 onPressed: () {
-                  print('duighduf');
+                  setState(() {
+                    widget.tasksAdded(taskTitle);
+                    Navigator.pop(context);
+                  });
                 },
               ),
             ],

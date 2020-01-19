@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_to_do_list/model/TaskModel.dart';
+import 'package:flutter_to_do_list/model/TaskData.dart';
+import 'package:provider/provider.dart';
 import 'Tasks_Tile.dart';
 
 class TasksList extends StatelessWidget {
-  List<TaskModel> tasks = [
-    TaskModel(taskName: 'mohamed'),
-    TaskModel(taskName: 'mohamed'),
-    TaskModel(taskName: 'mohamed'),
-  ];
+  Widget showListItems(BuildContext context, int index) {
+    return TaskTile(
+      name: Provider.of<TaskData>(context).tasks[index].Name,
+      isChecked: Provider.of<TaskData>(context).tasks[index].isDone,
+      checkBoxCallback: (checkBoxState) {
+//        setState(() {
+////          print('kflehn');
+////          Provider.of<TaskData>(context).tasks[index].toogleDone();
+//        });
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) {
-        return TaskTile(tasks[0].taskName, tasks[0].isDone);
-      },
-      itemCount: tasks.length,
+      itemBuilder: showListItems,
+      itemCount: Provider.of<TaskData>(context).tasks.length,
     );
   }
 }
