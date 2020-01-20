@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_to_do_list/Widgets/Constants.dart';
 import 'package:flutter_to_do_list/Widgets/Tasks_List.dart';
-import 'package:flutter_to_do_list/model/Task.dart';
+import 'package:flutter_to_do_list/model/TaskData.dart';
+import 'package:provider/provider.dart';
 
 class AddTask extends StatefulWidget {
-  Function tasksAdded;
-  AddTask(this.tasksAdded);
   @override
   _AddTaskState createState() => _AddTaskState();
 }
@@ -51,10 +50,8 @@ class _AddTaskState extends State<AddTask> {
                 ),
                 color: Colors.lightBlueAccent,
                 onPressed: () {
-                  setState(() {
-                    widget.tasksAdded(taskTitle);
-                    Navigator.pop(context);
-                  });
+                  Provider.of<TaskData>(context).tasksAdded(taskTitle);
+                  Navigator.pop(context);
                 },
               ),
             ],

@@ -15,12 +15,6 @@ class TasksScreen extends StatefulWidget {
 class _TasksScreenState extends State<TasksScreen> {
   String taskTitle;
 
-  void tasksAdded(String taskTitle) {
-//    setState(() {
-//      tasks.add(Task(Name: taskTitle));
-//    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +83,8 @@ class _TasksScreenState extends State<TasksScreen> {
 
   void ShowModelSheet(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) => AddTask(tasksAdded));
+      context: context,
+      builder: (BuildContext context) => AddTask(),
+    );
   }
 }

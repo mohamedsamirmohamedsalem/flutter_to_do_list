@@ -8,12 +8,7 @@ class TasksList extends StatelessWidget {
     return TaskTile(
       name: Provider.of<TaskData>(context).tasks[index].Name,
       isChecked: Provider.of<TaskData>(context).tasks[index].isDone,
-      checkBoxCallback: (checkBoxState) {
-//        setState(() {
-////          print('kflehn');
-////          Provider.of<TaskData>(context).tasks[index].toogleDone();
-//        });
-      },
+      index: index,
     );
   }
 
